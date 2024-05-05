@@ -8,14 +8,10 @@ import { ArrowRightIcon, ArrowLeftIcon, CodeIcon } from '@heroicons/react/solid'
 
 export function Carousel() {
   const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
-  // we want the scope to be always to be in the scope of the array so that the carousel is endless
+
   const indexInArrayScope =
     ((activeIndex % projects.length) + projects.length) % projects.length;
 
-  // so that the carousel is endless, we need to repeat the items twice
-  // then, we slice the the array so that we only have 3 items visible at the same time
-  //project.images = item
-  //{visibleItems.map((item) => {
   const visibleItems = [...projects, ...projects].slice(
     indexInArrayScope,
     indexInArrayScope + 3
@@ -44,13 +40,10 @@ export function Carousel() {
 
         <RevealOnScroll>
       <div id="wrapper" className="relative flex max-md:flex-wrap z-0 items-center justify-center w-full mb-10 md:h-[300px]">
-        {/*AnimatePresence is necessary to show the items after they are deleted because only max. 3 are shown*/}
         <AnimatePresence mode="popLayout" initial={false}>
         
           {visibleItems.map((project) => {
             
-            // The layout prop makes the elements change its position as soon as a new one is added
-            // The key tells framer-motion that the elements changed its position
             return (
 
               <motion.div
@@ -88,13 +81,8 @@ export function Carousel() {
                   </div>
                 <img className="rounded-2xl z-0 w-full h-full object-cover object-center drop-shadow-[0_0_15px_rgba(161,75,255,0.7)]" src={project.image}/>
                 </a>
-                {/* blur-[2px] */}
-                {/* <circle className="absolute z-0 rounded-xl h-[90%] w-[90%] bg-purple-500 blur-2xl"></circle> */}
-                {/* rounded-[90%] */}
               </motion.div>
-              
             );
-            
           })}
         
         </AnimatePresence> 
